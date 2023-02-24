@@ -1,4 +1,4 @@
-#include "Factory.hh"
+#include <Factory.hh>
 
 #include "Foo.hh"
 #include "Bar.hh"
@@ -9,11 +9,11 @@ int main() {
 
 Factory<Product> factory;
 
-factory.registerType<Bar>("bar");
-factory.registerType<Bar>("foo");
+factory.register_type<Bar>("foo");
+factory.register_type<Bar>("bar");
 
-Foo f = factory.dispatchType<Foo>("foo");
-Bar b = factory.dispatchType<Bar>("bar");
+Foo f = factory.dispatch_type<Foo>("foo");
+Bar b = factory.dispatch_type<Bar>("bar");
 
 f.foo();
 b.bar();
