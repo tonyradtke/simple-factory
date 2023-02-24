@@ -1,11 +1,11 @@
 <h2> Introduction </h2>
 
-  - This is intended to be a simple, lightweight, portable,header only Factory implementation
-  - BYOB (Bring Your Own Base!) (templatized by a 'base' class that you provide upon init)
+  - This is intended to be a simple, lightweight, portable, header only Factory implementation.
+  - BYOB (Bring Your Own Base) (templatized by a base class that you provide at initialization).
 
-  <p> Each type to be registered in the factory, must inheret from a single parent type. This allows us to have any type in the factory.
-      Althought inhereting from this single parent type is necessary to get around some compiler limitations surrounding implicit conversion, the 
-      type need not have any content. class Base{}; will suffice.   
+  <p>   Each type to be registered in the factory must inherit from a single parent type. This allows the factory to remain 100% generic. 
+      Although inheriting from this single parent type is necessary to get around some compiler limitations surrounding implicit conversion, the 
+      type need not have any content. just 'class Base{};' will suffice.   
       Types to be registered in the factory must have a default constructor, as well as a constructor taking a const Base&.
   </p>
 
@@ -47,6 +47,7 @@
     #include "Foo.hh"
     
     int main() {    
+
       Factory<Base> factory;
     
       factory.register_type<Foo>("foo");
@@ -57,7 +58,6 @@
     }
   ```
   
- 
 
   
 
