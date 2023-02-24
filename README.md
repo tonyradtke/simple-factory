@@ -46,13 +46,15 @@
     #include "Base.hh"
     #include "Foo.hh"
     
-    Factory<Base> factory;
-  
-    factory.register_type<Foo>("foo");
+    int main() {    
+      Factory<Base> factory;
     
-    Foo f = factory.dispatch_type<Foo>("foo");
+      factory.register_type<Foo>("foo");
+      
+      Foo f = factory.dispatch_type<Foo>("foo");
 
-    f.foo();
+      f.foo();
+    }
   ```
   
  
