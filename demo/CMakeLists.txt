@@ -10,24 +10,23 @@ project(demo)
 #
 # set vars
 #
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 SET(LIB_NAME "simple-factory")
+SET(DEMO_BINARY "__demo__")
+SET(INCLUDE_DIR "/usr/local/include")
 
 #
 #  wrangle files
 #
 include_directories("include/")
+include_directories(${INCLUDE_DIR})
+
+file(GLOB EXE_SOURCES "src/*.cc")
 
 #
 # link
 #
-add_library(${LIB_NAME} INTERFACE)
-target_include_directories(${LIB_NAME} INTERFACE .)
+add_executable(${DEMO_BINARY} ${EXE_SOURCES})
 
-#
-# install
-#
-install(TARGETS ${LIB_NAME} DESTINATION lib)
-install(DIRECTORY include/ DESTINATION include/
-        FILES_MATCHING PATTERN "*.hh")
 
 
