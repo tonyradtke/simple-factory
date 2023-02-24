@@ -5,24 +5,24 @@
 
   <p> Each type to be registered in the factory, must inheret from a single parent type. This allows us to have any type in the factory.
       Althought inhereting from this single parent type is necessary to get around some compiler limitations surrounding implicit conversion, the 
-      type need not have any content. ```class Base{};``` will suffice.   
+      type need not have any content. class Base{}; will suffice.   
       Types to be registered in the factory must have a default constructor, as well as a constructor taking a const Base&.
   </p>
 
 
 <h2> Example </h2>
  
-  - First lets create our universal ancestor type 
+  - First lets create our universal ancestor type (Base.hh) : 
 
   ```cpp
-    // Base.hh
+
     class Base{};
   ```
 
-  - Now we create a type to be registered in the factory : 
+  - Now we create a type to be registered in the factory (Foo.hh) : 
 
-  ```
-    //Foo.hh
+  ```cpp
+
     #include "Base.hh"
     
     class Foo : public Base {
@@ -41,7 +41,7 @@
   - Now we can register and dispatch types by key with the factory : 
 
   ```cpp
-    //driver.cc
+
     #include <Factory.hh>
     #include "Base.hh"
     #include "Foo.hh"
