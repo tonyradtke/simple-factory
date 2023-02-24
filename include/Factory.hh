@@ -7,31 +7,36 @@
 #include <functional>
 #include <iostream>
 
-#include "Product.hh"
-#include "Foo.hh"
+//must bring your own base..
 
+template<typename Base>
 class Factory {
 public:
 
-  std::map<std::string, std::function<std::shared_ptr<Product>()>> m_dispatcher;
+  std::map<std::string, std::function<std::shared_ptr<Base>()>> m_dispatcher;
 
-  Factory() {
-   
-    m_dispatcher["foo"] = []() -> std::shared_ptr<Foo> { return std::shared_ptr<Foo>(new Foo()); };
+  Factory() {};  
 
-  };  
+  //T must have default ctor....
+  template<typename T>
+  void registerType(std::string key) {
+    if (m_dispatcher.count(key)) { 
+      return;
+    }
+    m_dispatcher[key] = []() -> std::shared_ptr<T> { return std::shared_ptr<T>(new T()); };
+  } 
 
-  std::shared_ptr<Product> dispatch(std::string f_id) {
+  template<typename T>
+  T dispatchType(std::string s) {
+    return *(dispatch(s));
+  }
+
+  std::shared_ptr<Base> dispatch(std::string f_id) {
     if (not m_dispatcher.count(f_id)) { 
       std::cout << "key not in factory : " << f_id << "\n";
       return nullptr;
     }   
     return m_dispatcher[f_id]();
-  }
-
-  template<typename T>
-  T create(std::string s) {
-    return *(dispatch(s));
   }
 
   void size() {
